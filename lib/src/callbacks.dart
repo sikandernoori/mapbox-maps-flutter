@@ -65,6 +65,10 @@ typedef void OnMapIdleListener(MapIdleEventData mapIdleEventData);
 /// Definition for listener invoked when the map loading finishes.
 typedef void OnMapLoadedListener(MapLoadedEventData mapLoadedEventData);
 
+/// Definition for listener invoked when the map location updates.
+typedef void OnLocationChangeListener(
+    MapLocationChangeEventData mapLocationChangeEventData);
+
 /// Definition for listener invoked whenever the map load errors out.
 typedef void OnMapLoadErrorListener(
     MapLoadingErrorEventData mapLoadingErrorEventData);

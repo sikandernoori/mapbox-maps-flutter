@@ -25,6 +25,7 @@ class MapWidget extends StatefulWidget {
     this.onCameraChangeListener,
     this.onMapIdleListener,
     this.onMapLoadedListener,
+    this.onLocationChangeListener,
     this.onMapLoadErrorListener,
     this.onRenderFrameStartedListener,
     this.onRenderFrameFinishedListener,
@@ -49,6 +50,9 @@ class MapWidget extends StatefulWidget {
     }
     if (onMapLoadedListener != null) {
       _eventTypes.add(_MapEvent.mapLoaded);
+    }
+    if (onLocationChangeListener != null) {
+      _eventTypes.add(_MapEvent.locationChange);
     }
     if (onMapLoadErrorListener != null) {
       _eventTypes.add(_MapEvent.mapLoadingError);
@@ -109,6 +113,9 @@ class MapWidget extends StatefulWidget {
 
   /// Invoked when the Map's style has been fully loaded, and the Map has rendered all visible tiles.
   final OnMapLoadedListener? onMapLoadedListener;
+
+  /// Invoked when the Map's location has been updated.
+  final OnLocationChangeListener? onLocationChangeListener;
 
   /// Invoked whenever the map load errors out.
   final OnMapLoadErrorListener? onMapLoadErrorListener;
@@ -217,6 +224,7 @@ class _MapWidgetState extends State<MapWidget> {
       onCameraChangeListener: widget.onCameraChangeListener,
       onMapIdleListener: widget.onMapIdleListener,
       onMapLoadedListener: widget.onMapLoadedListener,
+      onLocationChangeListener: widget.onLocationChangeListener,
       onMapLoadErrorListener: widget.onMapLoadErrorListener,
       onRenderFrameFinishedListener: widget.onRenderFrameFinishedListener,
       onRenderFrameStartedListener: widget.onRenderFrameStartedListener,

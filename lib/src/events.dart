@@ -119,6 +119,16 @@ class MapLoadedEventData {
       : timeInterval = EventTimeInterval.fromJson(json['timeInterval']);
 }
 
+/// The class for map-loaded event in Observer
+class MapLocationChangeEventData {
+  /// The `timeInterval.begin` represents the time when a style is set, and the
+  /// `timeInterval.end` is taken when the `map` is fully loaded.
+  final Position position;
+
+  MapLocationChangeEventData.fromJson(Map<String, dynamic> json)
+      : position = Position(json['coordinates'][0], json["coordinates"][1]);
+}
+
 /// The class for map-loading-error event in Observer
 class MapLoadingErrorEventData {
   /// Defines what resource could not be loaded.

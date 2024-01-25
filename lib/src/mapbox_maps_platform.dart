@@ -10,6 +10,8 @@ class _MapboxMapsPlatform {
       ArgumentCallbacks<CameraChangedEventData>();
   final onMapIdlePlatform = ArgumentCallbacks<MapIdleEventData>();
   final onMapLoadedPlatform = ArgumentCallbacks<MapLoadedEventData>();
+  final onLocationChangePlatform =
+      ArgumentCallbacks<MapLocationChangeEventData>();
   final onMapLoadErrorPlatform = ArgumentCallbacks<MapLoadingErrorEventData>();
   final onRenderFrameFinishedPlatform =
       ArgumentCallbacks<RenderFrameFinishedEventData>();
@@ -53,6 +55,10 @@ class _MapboxMapsPlatform {
       case _MapEvent.cameraChanged:
         onCameraChangeListenerPlatform(
             CameraChangedEventData.fromJson(jsonDecode(call.arguments)));
+        break;
+      case _MapEvent.locationChange:
+        onLocationChangePlatform(
+            MapLocationChangeEventData.fromJson(jsonDecode(call.arguments)));
         break;
       case _MapEvent.mapIdle:
         onMapIdlePlatform(

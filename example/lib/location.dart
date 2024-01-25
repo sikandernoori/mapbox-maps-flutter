@@ -248,8 +248,13 @@ class LocationPageBodyState extends State<LocationPageBody> {
 
   @override
   Widget build(BuildContext context) {
-    final MapWidget mapWidget =
-        MapWidget(key: ValueKey("mapWidget"), onMapCreated: _onMapCreated);
+    final MapWidget mapWidget = MapWidget(
+      key: ValueKey("mapWidget"),
+      onMapCreated: _onMapCreated,
+      onLocationChangeListener: (mapLocationChangeEventData) {
+        print(mapLocationChangeEventData);
+      },
+    );
 
     final List<Widget> listViewChildren = <Widget>[];
 

@@ -6,6 +6,7 @@ class MapboxMap extends ChangeNotifier {
     required _MapboxMapsPlatform mapboxMapsPlatform,
     this.onStyleLoadedListener,
     this.onCameraChangeListener,
+    this.onLocationChangeListener,
     this.onMapIdleListener,
     this.onMapLoadedListener,
     this.onMapLoadErrorListener,
@@ -42,6 +43,12 @@ class MapboxMap extends ChangeNotifier {
     if (onMapLoadedListener != null) {
       _mapboxMapsPlatform.onMapLoadedPlatform.add((argument) {
         onMapLoadedListener?.call(argument);
+      });
+    }
+
+    if (onLocationChangeListener != null) {
+      _mapboxMapsPlatform.onLocationChangePlatform.add((argument) {
+        onLocationChangeListener?.call(argument);
       });
     }
     if (onMapLoadErrorListener != null) {
@@ -106,6 +113,9 @@ class MapboxMap extends ChangeNotifier {
 
   /// Invoked when the Map's style has been fully loaded, and the Map has rendered all visible tiles.
   final OnMapLoadedListener? onMapLoadedListener;
+
+  /// Invoked when the Map's location has been updated.
+  final OnLocationChangeListener? onLocationChangeListener;
 
   /// Invoked whenever the map load errors out
   final OnMapLoadErrorListener? onMapLoadErrorListener;

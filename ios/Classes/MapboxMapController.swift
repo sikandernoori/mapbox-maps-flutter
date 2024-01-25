@@ -169,6 +169,18 @@ class MapboxMapController: NSObject, FlutterPlatformView {
             mapboxMap.onResourceRequest.observe { [weak self] payload in
                 self?.channel.invokeMethod(event.methodName, arguments: payload.toJSONString)
             }.store(in: &cancelables)
+        case .locationChange:
+            mapView.location.onLocationChange.observe { [weak self] payload in
+                var data = ""
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: payload.first!.coordinate.toDict())
+                    data = String(data: jsonData, encoding: String.Encoding.utf8) ?? ""
+                } catch {
+                    data = ""
+                }
+
+                self?.channel.invokeMethod(event.methodName, arguments: data)
+            }.store(in: &cancelables)
         @unknown default:
             fatalError("Event \(event) is not supported.")
         }
