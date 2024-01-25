@@ -15,7 +15,7 @@ class GesturesController: NSObject, FLT_SETTINGSGesturesSettingsInterface, UIGes
             self.onGestureListener?.onScroll(FLT_GESTURESScreenCoordinate.makeWith(x: point.coordinates.latitude, y: point.coordinates.longitude), completion: {_ in })
         case .singleTap:
             let point = gestureManager.singleTapGestureRecognizer.location(in: mapView)
-            self.onGestureListener?.onTap(FLT_GESTURESScreenCoordinate.makeWith(x: NSNumber(value: point.x), y: NSNumber(value: point.y)), completion: {_ in })
+            self.onGestureListener?.onTap(FLT_GESTURESScreenCoordinate.makeWith(x: point.x, y: point.y), completion: {_ in })
         default: break
         }
     }
