@@ -78,7 +78,10 @@ class MapInterfaceController: NSObject, FLT_MapInterface {
     }
 
     func isGestureInProgressWithError(_ error: AutoreleasingUnsafeMutablePointer<FlutterError?>) -> NSNumber? {
-        error.pointee = FlutterError(code: MapInterfaceController.errorCode, message: "Not available.", details: nil)
+        if(self.mapboxMap.getGestureCount() > 0) {
+            return true
+        }
+        
         return false
     }
 
