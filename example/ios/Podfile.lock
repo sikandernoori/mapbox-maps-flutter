@@ -4,14 +4,17 @@ PODS:
     - Flutter
   - mapbox_maps_flutter (1.0.0-beta.1):
     - Flutter
-    - MapboxMaps (~> 11.0.0)
-  - MapboxCommon (24.0.0)
-  - MapboxCoreMaps (11.0.0):
-    - MapboxCommon (~> 24.0)
-  - MapboxMaps (11.0.0):
-    - MapboxCommon (= 24.0.0)
-    - MapboxCoreMaps (= 11.0.0)
+    - MapboxMaps
+  - MapboxCommon (24.1.0)
+  - MapboxCoreMaps (11.1.0):
+    - MapboxCommon (~> 24.1)
+  - MapboxMaps (11.1.0):
+    - MapboxCommon (= 24.1.0)
+    - MapboxCoreMaps (= 11.1.0)
     - Turf (= 2.7.0)
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
   - permission_handler_apple (9.0.4):
     - Flutter
   - Turf (2.7.0)
@@ -20,13 +23,14 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - integration_test (from `.symlinks/plugins/integration_test/ios`)
   - mapbox_maps_flutter (from `.symlinks/plugins/mapbox_maps_flutter/ios`)
+  - MapboxMaps (from `https://github.com/sikandernoori/mapbox-maps-ios.git`, branch `expose-gesture-count`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
 
 SPEC REPOS:
   trunk:
     - MapboxCommon
     - MapboxCoreMaps
-    - MapboxMaps
     - Turf
 
 EXTERNAL SOURCES:
@@ -36,19 +40,30 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/integration_test/ios"
   mapbox_maps_flutter:
     :path: ".symlinks/plugins/mapbox_maps_flutter/ios"
+  MapboxMaps:
+    :branch: expose-gesture-count
+    :git: https://github.com/sikandernoori/mapbox-maps-ios.git
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
 
+CHECKOUT OPTIONS:
+  MapboxMaps:
+    :commit: e1acfdf3456f3aa2b961e277eee5f1dbc90dafb4
+    :git: https://github.com/sikandernoori/mapbox-maps-ios.git
+
 SPEC CHECKSUMS:
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   integration_test: 13825b8a9334a850581300559b8839134b124670
-  mapbox_maps_flutter: 826a6fda4a08984e997af720bf9d8310cde1e00f
-  MapboxCommon: 0cca816960ad2d21c86e1d32435fcb412cfdcf4f
-  MapboxCoreMaps: 633f5ecd7580a6d1342ff20cc8732170b2cd7ba3
-  MapboxMaps: 1c219108691a2000cb842b02e64d82158d74e6cd
+  mapbox_maps_flutter: 6dbe7d412d4350740e3a9e62c9e36862d606a9ab
+  MapboxCommon: b84c1cf2d76899e598e2495639e52ebbe2088eac
+  MapboxCoreMaps: eebe37ab62f99bf09436099850646c6b6450615d
+  MapboxMaps: a1ce80599606b43d136814cdb8a869acb776e4a9
+  path_provider_foundation: 3784922295ac71e43754bd15e0653ccfd36a147c
   permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
   Turf: 13d1a92d969ca0311bbc26e8356cca178ce95da2
 
-PODFILE CHECKSUM: e9395e37b54f3250ebce302f8de7800b2ba2b828
+PODFILE CHECKSUM: 5f4ada4dbd7d7868d01c66eed7103711d51dd86f
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.15.2
