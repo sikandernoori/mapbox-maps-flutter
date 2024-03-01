@@ -40,7 +40,7 @@ public class OfflineDownloader: NSObject {
         styleDownloads = [stylePackDownload]
     }
     
-    func downloadTileRegions(bounds: CoordinateBounds, progressEventSink: FlutterEventSink?, tileRegionId: String, minZoom: Double, maxZoom: Double, useDepreciated: Bool, mapStyleUrI: String) {
+    func downloadTileRegions(bounds: CoordinateBounds, progressEventSink: FlutterEventSink?, tileRegionId: String, minZoom: Double, maxZoom: Double, useDepreciated: Bool, mapStyleUrI: String, flutterResult: @escaping FlutterResult) {
         self.tileStore = TileStore.default
         guard let tileStore = tileStore else {
             preconditionFailure()
@@ -112,6 +112,7 @@ public class OfflineDownloader: NSObject {
                 networkRestriction: .none)!
             
             let tileRegionDownload = tileStore.loadTileRegion(forId: tileRegionId, loadOptions: tileRegionLoadOptions) { progress in
+                flutterResult(nil)
                 let progressDict = progress.dictionaryWithValues(forKeys: self.progressKeys)
                 progressEventSink?(progressDict)
             } completion: { result in
@@ -119,6 +120,15 @@ public class OfflineDownloader: NSObject {
                 case .success(let tileRegion):
                     progressEventSink?(FlutterEndOfEventStream)
                     self.regionDownloads = []
+
+                case .failure(let error as MapboxMaps.TileRegionError):
+                    switch error {
+                        case .tileCountExceeded:
+                        flutterResult(FlutterError(code: "limit-exceed", message: error.failureReason, details: error.localizedDescription))
+                            self.regionDownloads = []
+                        default:
+                            break
+                        }
                     
                 case .failure(let error):
                     progressEventSink?(FlutterError(code: "1", message: error.localizedDescription, details: error.localizedDescription))

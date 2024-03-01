@@ -61,9 +61,8 @@ public class SwiftMapboxMapsPlugin: MapboxMapsPlugin {
                 let neCoordinate = CLLocationCoordinate2D(latitude: neCoordinates[1], longitude: neCoordinates[0])
 
                 let coordinateBounds = CoordinateBounds(southwest: swCoordinate, northeast: neCoordinate)
-                
-                offlineDownloader.downloadTileRegions(bounds: coordinateBounds, progressEventSink: swiftMapboxMapsPluginInstance.regionProgressEventSink, tileRegionId: tileRegionId, minZoom: minZoom, maxZoom: maxZoom, useDepreciated: useDepreciated, mapStyleUrI: mapStyleUrI)
-                result(nil)
+
+                offlineDownloader.downloadTileRegions(bounds: coordinateBounds, progressEventSink: swiftMapboxMapsPluginInstance.regionProgressEventSink, tileRegionId: tileRegionId, minZoom: minZoom, maxZoom: maxZoom, useDepreciated: useDepreciated, mapStyleUrI: mapStyleUrI, flutterResult: result)
             case "getListOfStylePacks":
                 offlineDownloader.offlineManager.allStylePacks { res in
                     switch res {

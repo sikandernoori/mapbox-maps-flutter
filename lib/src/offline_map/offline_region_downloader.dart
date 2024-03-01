@@ -63,18 +63,25 @@ class MapDownloader {
         <String, dynamic>{'mapStyleUrI': mapStyleUrI});
   }
 
-  Future<void> downloadOfflineRegion(OfflineRegionDefinition definition,
+  Future<PlatformException?> downloadOfflineRegion(
+      OfflineRegionDefinition definition,
       {Map<String, dynamic> metadata = const {},
       String? accessToken,
       bool useDepreciated = false}) async {
-    return await _globalChannel
-        .invokeMethod('downloadOfflineRegion', <String, dynamic>{
-      'accessToken': accessToken,
-      'tileRegionId': definition.tileRegionId,
-      'definition': definition.toMap(),
-      'metadata': metadata,
-      'useDepreciated': useDepreciated
-    });
+    try {
+      await _globalChannel
+          .invokeMethod('downloadOfflineRegion', <String, dynamic>{
+        'accessToken': accessToken,
+        'tileRegionId': definition.tileRegionId,
+        'definition': definition.toMap(),
+        'metadata': metadata,
+        'useDepreciated': useDepreciated
+      });
+
+      return null;
+    } on PlatformException catch (e) {
+      return e;
+    }
   }
 
   Future<void> cancelDownloads() async =>
