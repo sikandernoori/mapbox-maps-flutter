@@ -167,7 +167,7 @@ class DownloadOfflineRegionPageBodyState
                 ]
               ]).toJson(),
               fillColor: Colors.red.withOpacity(0.3).value));
-          await MapDownloader().downloadOfflineRegion(
+          final result = await MapDownloader().downloadOfflineRegion(
             OfflineRegionDefinition(
               tileRegionId:
                   'Hamburg', // DateTime.now().millisecondsSinceEpoch.toString(),
@@ -178,6 +178,14 @@ class DownloadOfflineRegionPageBodyState
             ),
             useDepreciated: false,
           );
+
+          if (result != null) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(result.message ?? result.code),
+              backgroundColor: Theme.of(context).primaryColor,
+              duration: Duration(seconds: 2),
+            ));
+          }
         }
       },
     );
@@ -189,7 +197,7 @@ class DownloadOfflineRegionPageBodyState
       key: ValueKey("mapWidget"),
       cameraOptions: CameraOptions(
         center: Point(coordinates: Position(24.743791, 59.437668)).toJson(),
-        zoom: 8,
+        zoom: 9,
         pitch: 0.0,
       ),
       onMapCreated: _onMapCreated,
