@@ -78,10 +78,10 @@ class MapInterfaceController: NSObject, FLT_MapInterface {
     }
 
     func isGestureInProgressWithError(_ error: AutoreleasingUnsafeMutablePointer<FlutterError?>) -> NSNumber? {
-        if(self.mapboxMap.getGestureCount() > 0) {
+        if(self.mapboxMap.isGestureInProgress) {
             return true
         }
-        
+           
         return false
     }
 

@@ -4,6 +4,7 @@ import 'package:mapbox_maps_example/animation.dart';
 import 'package:mapbox_maps_example/camera.dart';
 import 'package:mapbox_maps_example/circle_annotations.dart';
 import 'package:mapbox_maps_example/cluster.dart';
+import 'package:mapbox_maps_example/download_offline_region_page.dart';
 import 'package:mapbox_maps_example/ornaments.dart';
 import 'package:mapbox_maps_example/geojson_line.dart';
 import 'package:mapbox_maps_example/image_source.dart';
@@ -25,6 +26,7 @@ import 'gestures.dart';
 final List<ExamplePage> _allPages = <ExamplePage>[
   FullMapPage(),
   StylePage(),
+  DownloadOfflineRegionPage(),
   CameraPage(),
   ProjectionPage(),
   MapInterfacePage(),
@@ -52,14 +54,18 @@ class MapsDemo extends StatelessWidget {
   //
   // Alternatively you can replace `String.fromEnvironment("ACCESS_TOKEN")`
   // in the following line with your access token directly.
-  static const String ACCESS_TOKEN = String.fromEnvironment("ACCESS_TOKEN");
+  static const String ACCESS_TOKEN =
+      "pk.eyJ1Ijoic2thbmRhcnJmIiwiYSI6ImNsZmlpYmVldzJkYmUzeG4xeHhsaHVxc3gifQ.4OSCsSXAu6qH1npfYyR3kQ";
 
   void _pushPage(BuildContext context, ExamplePage page) async {
-    Navigator.of(context).push(MaterialPageRoute<void>(
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
         builder: (_) => Scaffold(
-              appBar: AppBar(title: Text(page.title)),
-              body: page,
-            )));
+          appBar: AppBar(title: Text(page.title)),
+          body: page,
+        ),
+      ),
+    );
   }
 
   @override

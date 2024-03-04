@@ -2,14 +2,19 @@ library mapbox_maps_flutter;
 
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
+// import 'dart:io';
+import 'dart:io' as io;
+import 'package:path_provider/path_provider.dart';
 
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mapbox_maps_flutter/src/offline_map/offline_region.dart';
+import 'package:mapbox_maps_flutter/src/offline_map/offline_style_pack.dart';
 import 'package:turf/turf.dart';
+export 'package:flutter/services.dart';
 
 import 'src/proxy_binary_messenger.dart' show ProxyBinaryMessenger;
 
@@ -51,3 +56,7 @@ part 'src/style/source/raster_source.dart';
 part 'src/style/source/rasterdem_source.dart';
 part 'src/style/source/vector_source.dart';
 part 'src/style/style.dart';
+// part 'src/offline_map/download_region_status.dart';
+part 'src/offline_map/offline_region_definition.dart';
+part 'src/offline_map/offline_region_downloader.dart';
+part 'src/offline_map/download_progress.dart';

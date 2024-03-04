@@ -676,6 +676,26 @@ class CoordinateBounds {
   /// Coordinates provided in `southwest` and `northeast` fields would be omitted and have no effect.
   bool infiniteBounds;
 
+  Map<String, dynamic> toMap() {
+    return {
+      'southwest': southwest,
+      'northeast': northeast,
+      'infiniteBounds': infiniteBounds,
+    };
+  }
+
+  factory CoordinateBounds.fromMap(Map<String, dynamic> map) {
+    return CoordinateBounds(
+      southwest: (map['southwest'] as Map<String?, Object?>?)
+              ?.cast<String?, Object?>() ??
+          {},
+      northeast: (map['northeast'] as Map<String?, Object?>?)
+              ?.cast<String?, Object?>() ??
+          {},
+      infiniteBounds: map['infiniteBounds'] ?? false,
+    );
+  }
+
   Object encode() {
     return <Object?>[
       southwest,
@@ -4152,304 +4172,304 @@ class _OfflineRegionCodec extends StandardMessageCodec {
   }
 }
 
-/// An offline region represents an identifiable geographic region with optional metadata.
-class OfflineRegion {
-  /// Constructor for [OfflineRegion].  The [binaryMessenger] named argument is
-  /// available for dependency injection.  If it is left null, the default
-  /// BinaryMessenger will be used which routes to the host platform.
-  OfflineRegion({BinaryMessenger? binaryMessenger})
-      : __pigeon_binaryMessenger = binaryMessenger;
-  final BinaryMessenger? __pigeon_binaryMessenger;
+// /// An offline region represents an identifiable geographic region with optional metadata.
+// class OfflineRegion {
+//   /// Constructor for [OfflineRegion].  The [binaryMessenger] named argument is
+//   /// available for dependency injection.  If it is left null, the default
+//   /// BinaryMessenger will be used which routes to the host platform.
+//   OfflineRegion({BinaryMessenger? binaryMessenger})
+//       : __pigeon_binaryMessenger = binaryMessenger;
+//   final BinaryMessenger? __pigeon_binaryMessenger;
 
-  static const MessageCodec<Object?> pigeonChannelCodec = _OfflineRegionCodec();
+//   static const MessageCodec<Object?> pigeonChannelCodec = _OfflineRegionCodec();
 
-  /// The regions identifier
-  Future<int> getIdentifier() async {
-    const String __pigeon_channelName =
-        'dev.flutter.pigeon.mapbox_maps_flutter.OfflineRegion.getIdentifier';
-    final BasicMessageChannel<Object?> __pigeon_channel =
-        BasicMessageChannel<Object?>(
-      __pigeon_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: __pigeon_binaryMessenger,
-    );
-    final List<Object?>? __pigeon_replyList =
-        await __pigeon_channel.send(null) as List<Object?>?;
-    if (__pigeon_replyList == null) {
-      throw _createConnectionError(__pigeon_channelName);
-    } else if (__pigeon_replyList.length > 1) {
-      throw PlatformException(
-        code: __pigeon_replyList[0]! as String,
-        message: __pigeon_replyList[1] as String?,
-        details: __pigeon_replyList[2],
-      );
-    } else if (__pigeon_replyList[0] == null) {
-      throw PlatformException(
-        code: 'null-error',
-        message: 'Host platform returned null value for non-null return value.',
-      );
-    } else {
-      return (__pigeon_replyList[0] as int?)!;
-    }
-  }
+//   /// The regions identifier
+//   Future<int> getIdentifier() async {
+//     const String __pigeon_channelName =
+//         'dev.flutter.pigeon.mapbox_maps_flutter.OfflineRegion.getIdentifier';
+//     final BasicMessageChannel<Object?> __pigeon_channel =
+//         BasicMessageChannel<Object?>(
+//       __pigeon_channelName,
+//       pigeonChannelCodec,
+//       binaryMessenger: __pigeon_binaryMessenger,
+//     );
+//     final List<Object?>? __pigeon_replyList =
+//         await __pigeon_channel.send(null) as List<Object?>?;
+//     if (__pigeon_replyList == null) {
+//       throw _createConnectionError(__pigeon_channelName);
+//     } else if (__pigeon_replyList.length > 1) {
+//       throw PlatformException(
+//         code: __pigeon_replyList[0]! as String,
+//         message: __pigeon_replyList[1] as String?,
+//         details: __pigeon_replyList[2],
+//       );
+//     } else if (__pigeon_replyList[0] == null) {
+//       throw PlatformException(
+//         code: 'null-error',
+//         message: 'Host platform returned null value for non-null return value.',
+//       );
+//     } else {
+//       return (__pigeon_replyList[0] as int?)!;
+//     }
+//   }
 
-  /// The tile pyramid defining the region. Tile pyramid and geometry definitions are
-  /// mutually exclusive.
-  ///
-  /// @return A definition describing the tile pyramid including attributes, otherwise empty.
-  Future<OfflineRegionTilePyramidDefinition?> getTilePyramidDefinition() async {
-    const String __pigeon_channelName =
-        'dev.flutter.pigeon.mapbox_maps_flutter.OfflineRegion.getTilePyramidDefinition';
-    final BasicMessageChannel<Object?> __pigeon_channel =
-        BasicMessageChannel<Object?>(
-      __pigeon_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: __pigeon_binaryMessenger,
-    );
-    final List<Object?>? __pigeon_replyList =
-        await __pigeon_channel.send(null) as List<Object?>?;
-    if (__pigeon_replyList == null) {
-      throw _createConnectionError(__pigeon_channelName);
-    } else if (__pigeon_replyList.length > 1) {
-      throw PlatformException(
-        code: __pigeon_replyList[0]! as String,
-        message: __pigeon_replyList[1] as String?,
-        details: __pigeon_replyList[2],
-      );
-    } else {
-      return (__pigeon_replyList[0] as OfflineRegionTilePyramidDefinition?);
-    }
-  }
+//   /// The tile pyramid defining the region. Tile pyramid and geometry definitions are
+//   /// mutually exclusive.
+//   ///
+//   /// @return A definition describing the tile pyramid including attributes, otherwise empty.
+//   Future<OfflineRegionTilePyramidDefinition?> getTilePyramidDefinition() async {
+//     const String __pigeon_channelName =
+//         'dev.flutter.pigeon.mapbox_maps_flutter.OfflineRegion.getTilePyramidDefinition';
+//     final BasicMessageChannel<Object?> __pigeon_channel =
+//         BasicMessageChannel<Object?>(
+//       __pigeon_channelName,
+//       pigeonChannelCodec,
+//       binaryMessenger: __pigeon_binaryMessenger,
+//     );
+//     final List<Object?>? __pigeon_replyList =
+//         await __pigeon_channel.send(null) as List<Object?>?;
+//     if (__pigeon_replyList == null) {
+//       throw _createConnectionError(__pigeon_channelName);
+//     } else if (__pigeon_replyList.length > 1) {
+//       throw PlatformException(
+//         code: __pigeon_replyList[0]! as String,
+//         message: __pigeon_replyList[1] as String?,
+//         details: __pigeon_replyList[2],
+//       );
+//     } else {
+//       return (__pigeon_replyList[0] as OfflineRegionTilePyramidDefinition?);
+//     }
+//   }
 
-  /// The geometry defining the region. Geometry and tile pyramid definitions are
-  /// mutually exclusive.
-  ///
-  /// @return A definition describing the geometry including attributes, otherwise empty.
-  Future<OfflineRegionGeometryDefinition?> getGeometryDefinition() async {
-    const String __pigeon_channelName =
-        'dev.flutter.pigeon.mapbox_maps_flutter.OfflineRegion.getGeometryDefinition';
-    final BasicMessageChannel<Object?> __pigeon_channel =
-        BasicMessageChannel<Object?>(
-      __pigeon_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: __pigeon_binaryMessenger,
-    );
-    final List<Object?>? __pigeon_replyList =
-        await __pigeon_channel.send(null) as List<Object?>?;
-    if (__pigeon_replyList == null) {
-      throw _createConnectionError(__pigeon_channelName);
-    } else if (__pigeon_replyList.length > 1) {
-      throw PlatformException(
-        code: __pigeon_replyList[0]! as String,
-        message: __pigeon_replyList[1] as String?,
-        details: __pigeon_replyList[2],
-      );
-    } else {
-      return (__pigeon_replyList[0] as OfflineRegionGeometryDefinition?);
-    }
-  }
+//   /// The geometry defining the region. Geometry and tile pyramid definitions are
+//   /// mutually exclusive.
+//   ///
+//   /// @return A definition describing the geometry including attributes, otherwise empty.
+//   Future<OfflineRegionGeometryDefinition?> getGeometryDefinition() async {
+//     const String __pigeon_channelName =
+//         'dev.flutter.pigeon.mapbox_maps_flutter.OfflineRegion.getGeometryDefinition';
+//     final BasicMessageChannel<Object?> __pigeon_channel =
+//         BasicMessageChannel<Object?>(
+//       __pigeon_channelName,
+//       pigeonChannelCodec,
+//       binaryMessenger: __pigeon_binaryMessenger,
+//     );
+//     final List<Object?>? __pigeon_replyList =
+//         await __pigeon_channel.send(null) as List<Object?>?;
+//     if (__pigeon_replyList == null) {
+//       throw _createConnectionError(__pigeon_channelName);
+//     } else if (__pigeon_replyList.length > 1) {
+//       throw PlatformException(
+//         code: __pigeon_replyList[0]! as String,
+//         message: __pigeon_replyList[1] as String?,
+//         details: __pigeon_replyList[2],
+//       );
+//     } else {
+//       return (__pigeon_replyList[0] as OfflineRegionGeometryDefinition?);
+//     }
+//   }
 
-  /// Arbitrary binary region metadata.
-  ///
-  /// @return The metadata associated with the region.
-  Future<Uint8List> getMetadata() async {
-    const String __pigeon_channelName =
-        'dev.flutter.pigeon.mapbox_maps_flutter.OfflineRegion.getMetadata';
-    final BasicMessageChannel<Object?> __pigeon_channel =
-        BasicMessageChannel<Object?>(
-      __pigeon_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: __pigeon_binaryMessenger,
-    );
-    final List<Object?>? __pigeon_replyList =
-        await __pigeon_channel.send(null) as List<Object?>?;
-    if (__pigeon_replyList == null) {
-      throw _createConnectionError(__pigeon_channelName);
-    } else if (__pigeon_replyList.length > 1) {
-      throw PlatformException(
-        code: __pigeon_replyList[0]! as String,
-        message: __pigeon_replyList[1] as String?,
-        details: __pigeon_replyList[2],
-      );
-    } else if (__pigeon_replyList[0] == null) {
-      throw PlatformException(
-        code: 'null-error',
-        message: 'Host platform returned null value for non-null return value.',
-      );
-    } else {
-      return (__pigeon_replyList[0] as Uint8List?)!;
-    }
-  }
+//   /// Arbitrary binary region metadata.
+//   ///
+//   /// @return The metadata associated with the region.
+//   Future<Uint8List> getMetadata() async {
+//     const String __pigeon_channelName =
+//         'dev.flutter.pigeon.mapbox_maps_flutter.OfflineRegion.getMetadata';
+//     final BasicMessageChannel<Object?> __pigeon_channel =
+//         BasicMessageChannel<Object?>(
+//       __pigeon_channelName,
+//       pigeonChannelCodec,
+//       binaryMessenger: __pigeon_binaryMessenger,
+//     );
+//     final List<Object?>? __pigeon_replyList =
+//         await __pigeon_channel.send(null) as List<Object?>?;
+//     if (__pigeon_replyList == null) {
+//       throw _createConnectionError(__pigeon_channelName);
+//     } else if (__pigeon_replyList.length > 1) {
+//       throw PlatformException(
+//         code: __pigeon_replyList[0]! as String,
+//         message: __pigeon_replyList[1] as String?,
+//         details: __pigeon_replyList[2],
+//       );
+//     } else if (__pigeon_replyList[0] == null) {
+//       throw PlatformException(
+//         code: 'null-error',
+//         message: 'Host platform returned null value for non-null return value.',
+//       );
+//     } else {
+//       return (__pigeon_replyList[0] as Uint8List?)!;
+//     }
+//   }
 
-  /// Sets arbitrary binary region metadata for the region.
-  ///
-  /// Note that this setter is asynchronous and the given metadata is applied only
-  /// after the resulting callback is invoked with no error.
-  ///
-  /// @param metadata The metadata associated with the region.
-  /// @param callback Called once the request is complete or an error occurred.
-  Future<void> setMetadata(Uint8List metadata) async {
-    const String __pigeon_channelName =
-        'dev.flutter.pigeon.mapbox_maps_flutter.OfflineRegion.setMetadata';
-    final BasicMessageChannel<Object?> __pigeon_channel =
-        BasicMessageChannel<Object?>(
-      __pigeon_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: __pigeon_binaryMessenger,
-    );
-    final List<Object?>? __pigeon_replyList =
-        await __pigeon_channel.send(<Object?>[metadata]) as List<Object?>?;
-    if (__pigeon_replyList == null) {
-      throw _createConnectionError(__pigeon_channelName);
-    } else if (__pigeon_replyList.length > 1) {
-      throw PlatformException(
-        code: __pigeon_replyList[0]! as String,
-        message: __pigeon_replyList[1] as String?,
-        details: __pigeon_replyList[2],
-      );
-    } else {
-      return;
-    }
-  }
+//   /// Sets arbitrary binary region metadata for the region.
+//   ///
+//   /// Note that this setter is asynchronous and the given metadata is applied only
+//   /// after the resulting callback is invoked with no error.
+//   ///
+//   /// @param metadata The metadata associated with the region.
+//   /// @param callback Called once the request is complete or an error occurred.
+//   Future<void> setMetadata(Uint8List metadata) async {
+//     const String __pigeon_channelName =
+//         'dev.flutter.pigeon.mapbox_maps_flutter.OfflineRegion.setMetadata';
+//     final BasicMessageChannel<Object?> __pigeon_channel =
+//         BasicMessageChannel<Object?>(
+//       __pigeon_channelName,
+//       pigeonChannelCodec,
+//       binaryMessenger: __pigeon_binaryMessenger,
+//     );
+//     final List<Object?>? __pigeon_replyList =
+//         await __pigeon_channel.send(<Object?>[metadata]) as List<Object?>?;
+//     if (__pigeon_replyList == null) {
+//       throw _createConnectionError(__pigeon_channelName);
+//     } else if (__pigeon_replyList.length > 1) {
+//       throw PlatformException(
+//         code: __pigeon_replyList[0]! as String,
+//         message: __pigeon_replyList[1] as String?,
+//         details: __pigeon_replyList[2],
+//       );
+//     } else {
+//       return;
+//     }
+//   }
 
-  /// Sets the download state of an offline region
-  /// A region is either inactive (not downloading, but previously-downloaded
-  /// resources are available for use), or active (resources are being downloaded
-  /// or will be downloaded, if necessary, when network access is available).
-  ///
-  /// If the region is already in the given state, this call is ignored.
-  ///
-  /// @param state The new state to set.
-  Future<void> setOfflineRegionDownloadState(
-      OfflineRegionDownloadState state) async {
-    const String __pigeon_channelName =
-        'dev.flutter.pigeon.mapbox_maps_flutter.OfflineRegion.setOfflineRegionDownloadState';
-    final BasicMessageChannel<Object?> __pigeon_channel =
-        BasicMessageChannel<Object?>(
-      __pigeon_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: __pigeon_binaryMessenger,
-    );
-    final List<Object?>? __pigeon_replyList =
-        await __pigeon_channel.send(<Object?>[state.index]) as List<Object?>?;
-    if (__pigeon_replyList == null) {
-      throw _createConnectionError(__pigeon_channelName);
-    } else if (__pigeon_replyList.length > 1) {
-      throw PlatformException(
-        code: __pigeon_replyList[0]! as String,
-        message: __pigeon_replyList[1] as String?,
-        details: __pigeon_replyList[2],
-      );
-    } else {
-      return;
-    }
-  }
+//   /// Sets the download state of an offline region
+//   /// A region is either inactive (not downloading, but previously-downloaded
+//   /// resources are available for use), or active (resources are being downloaded
+//   /// or will be downloaded, if necessary, when network access is available).
+//   ///
+//   /// If the region is already in the given state, this call is ignored.
+//   ///
+//   /// @param state The new state to set.
+//   Future<void> setOfflineRegionDownloadState(
+//       OfflineRegionDownloadState state) async {
+//     const String __pigeon_channelName =
+//         'dev.flutter.pigeon.mapbox_maps_flutter.OfflineRegion.setOfflineRegionDownloadState';
+//     final BasicMessageChannel<Object?> __pigeon_channel =
+//         BasicMessageChannel<Object?>(
+//       __pigeon_channelName,
+//       pigeonChannelCodec,
+//       binaryMessenger: __pigeon_binaryMessenger,
+//     );
+//     final List<Object?>? __pigeon_replyList =
+//         await __pigeon_channel.send(<Object?>[state.index]) as List<Object?>?;
+//     if (__pigeon_replyList == null) {
+//       throw _createConnectionError(__pigeon_channelName);
+//     } else if (__pigeon_replyList.length > 1) {
+//       throw PlatformException(
+//         code: __pigeon_replyList[0]! as String,
+//         message: __pigeon_replyList[1] as String?,
+//         details: __pigeon_replyList[2],
+//       );
+//     } else {
+//       return;
+//     }
+//   }
 
-  /// Invalidate all the tiles for the region forcing to revalidate
-  /// the tiles with the server before using. This is more efficient than deleting the
-  /// offline region and downloading it again because if the data on the cache matches
-  /// the server, no new data gets transmitted.
-  ///
-  /// @param callback Called once the request is complete or an error occurred.
-  Future<void> invalidate() async {
-    const String __pigeon_channelName =
-        'dev.flutter.pigeon.mapbox_maps_flutter.OfflineRegion.invalidate';
-    final BasicMessageChannel<Object?> __pigeon_channel =
-        BasicMessageChannel<Object?>(
-      __pigeon_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: __pigeon_binaryMessenger,
-    );
-    final List<Object?>? __pigeon_replyList =
-        await __pigeon_channel.send(null) as List<Object?>?;
-    if (__pigeon_replyList == null) {
-      throw _createConnectionError(__pigeon_channelName);
-    } else if (__pigeon_replyList.length > 1) {
-      throw PlatformException(
-        code: __pigeon_replyList[0]! as String,
-        message: __pigeon_replyList[1] as String?,
-        details: __pigeon_replyList[2],
-      );
-    } else {
-      return;
-    }
-  }
+//   /// Invalidate all the tiles for the region forcing to revalidate
+//   /// the tiles with the server before using. This is more efficient than deleting the
+//   /// offline region and downloading it again because if the data on the cache matches
+//   /// the server, no new data gets transmitted.
+//   ///
+//   /// @param callback Called once the request is complete or an error occurred.
+//   Future<void> invalidate() async {
+//     const String __pigeon_channelName =
+//         'dev.flutter.pigeon.mapbox_maps_flutter.OfflineRegion.invalidate';
+//     final BasicMessageChannel<Object?> __pigeon_channel =
+//         BasicMessageChannel<Object?>(
+//       __pigeon_channelName,
+//       pigeonChannelCodec,
+//       binaryMessenger: __pigeon_binaryMessenger,
+//     );
+//     final List<Object?>? __pigeon_replyList =
+//         await __pigeon_channel.send(null) as List<Object?>?;
+//     if (__pigeon_replyList == null) {
+//       throw _createConnectionError(__pigeon_channelName);
+//     } else if (__pigeon_replyList.length > 1) {
+//       throw PlatformException(
+//         code: __pigeon_replyList[0]! as String,
+//         message: __pigeon_replyList[1] as String?,
+//         details: __pigeon_replyList[2],
+//       );
+//     } else {
+//       return;
+//     }
+//   }
 
-  /// Remove an offline region from the database and perform any resources
-  /// evictions necessary as a result.
-  ///
-  /// @param callback Called once the request is complete or an error occurred.
-  Future<void> purge() async {
-    const String __pigeon_channelName =
-        'dev.flutter.pigeon.mapbox_maps_flutter.OfflineRegion.purge';
-    final BasicMessageChannel<Object?> __pigeon_channel =
-        BasicMessageChannel<Object?>(
-      __pigeon_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: __pigeon_binaryMessenger,
-    );
-    final List<Object?>? __pigeon_replyList =
-        await __pigeon_channel.send(null) as List<Object?>?;
-    if (__pigeon_replyList == null) {
-      throw _createConnectionError(__pigeon_channelName);
-    } else if (__pigeon_replyList.length > 1) {
-      throw PlatformException(
-        code: __pigeon_replyList[0]! as String,
-        message: __pigeon_replyList[1] as String?,
-        details: __pigeon_replyList[2],
-      );
-    } else {
-      return;
-    }
-  }
-}
+//   /// Remove an offline region from the database and perform any resources
+//   /// evictions necessary as a result.
+//   ///
+//   /// @param callback Called once the request is complete or an error occurred.
+//   Future<void> purge() async {
+//     const String __pigeon_channelName =
+//         'dev.flutter.pigeon.mapbox_maps_flutter.OfflineRegion.purge';
+//     final BasicMessageChannel<Object?> __pigeon_channel =
+//         BasicMessageChannel<Object?>(
+//       __pigeon_channelName,
+//       pigeonChannelCodec,
+//       binaryMessenger: __pigeon_binaryMessenger,
+//     );
+//     final List<Object?>? __pigeon_replyList =
+//         await __pigeon_channel.send(null) as List<Object?>?;
+//     if (__pigeon_replyList == null) {
+//       throw _createConnectionError(__pigeon_channelName);
+//     } else if (__pigeon_replyList.length > 1) {
+//       throw PlatformException(
+//         code: __pigeon_replyList[0]! as String,
+//         message: __pigeon_replyList[1] as String?,
+//         details: __pigeon_replyList[2],
+//       );
+//     } else {
+//       return;
+//     }
+//   }
+// }
 
-/// The `offline region manager` that manages offline packs. All of the class’s instance methods are asynchronous
-/// reflecting the fact that offline resources are stored in a database. The offline manager maintains a canonical
-/// collection of offline packs.
-class OfflineRegionManager {
-  /// Constructor for [OfflineRegionManager].  The [binaryMessenger] named argument is
-  /// available for dependency injection.  If it is left null, the default
-  /// BinaryMessenger will be used which routes to the host platform.
-  OfflineRegionManager({BinaryMessenger? binaryMessenger})
-      : __pigeon_binaryMessenger = binaryMessenger;
-  final BinaryMessenger? __pigeon_binaryMessenger;
+// /// The `offline region manager` that manages offline packs. All of the class’s instance methods are asynchronous
+// /// reflecting the fact that offline resources are stored in a database. The offline manager maintains a canonical
+// /// collection of offline packs.
+// class OfflineRegionManager {
+//   /// Constructor for [OfflineRegionManager].  The [binaryMessenger] named argument is
+//   /// available for dependency injection.  If it is left null, the default
+//   /// BinaryMessenger will be used which routes to the host platform.
+//   OfflineRegionManager({BinaryMessenger? binaryMessenger})
+//       : __pigeon_binaryMessenger = binaryMessenger;
+//   final BinaryMessenger? __pigeon_binaryMessenger;
 
-  static const MessageCodec<Object?> pigeonChannelCodec =
-      StandardMessageCodec();
+//   static const MessageCodec<Object?> pigeonChannelCodec =
+//       StandardMessageCodec();
 
-  /// Sets the maximum number of Mapbox-hosted tiles that may be downloaded and stored on the current device.
-  ///
-  /// By default, the limit is set to 6,000.
-  /// Once this limit is reached, `OfflineRegionObserver.mapboxTileCountLimitExceeded()`
-  /// fires every additional attempt to download additional tiles until already downloaded tiles are removed
-  /// by calling `OfflineRegion.purge()` API.
-  ///
-  /// @param limit the maximum number of tiles allowed to be downloaded
-  Future<void> setOfflineMapboxTileCountLimit(int limit) async {
-    const String __pigeon_channelName =
-        'dev.flutter.pigeon.mapbox_maps_flutter.OfflineRegionManager.setOfflineMapboxTileCountLimit';
-    final BasicMessageChannel<Object?> __pigeon_channel =
-        BasicMessageChannel<Object?>(
-      __pigeon_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: __pigeon_binaryMessenger,
-    );
-    final List<Object?>? __pigeon_replyList =
-        await __pigeon_channel.send(<Object?>[limit]) as List<Object?>?;
-    if (__pigeon_replyList == null) {
-      throw _createConnectionError(__pigeon_channelName);
-    } else if (__pigeon_replyList.length > 1) {
-      throw PlatformException(
-        code: __pigeon_replyList[0]! as String,
-        message: __pigeon_replyList[1] as String?,
-        details: __pigeon_replyList[2],
-      );
-    } else {
-      return;
-    }
-  }
-}
+//   /// Sets the maximum number of Mapbox-hosted tiles that may be downloaded and stored on the current device.
+//   ///
+//   /// By default, the limit is set to 6,000.
+//   /// Once this limit is reached, `OfflineRegionObserver.mapboxTileCountLimitExceeded()`
+//   /// fires every additional attempt to download additional tiles until already downloaded tiles are removed
+//   /// by calling `OfflineRegion.purge()` API.
+//   ///
+//   /// @param limit the maximum number of tiles allowed to be downloaded
+//   Future<void> setOfflineMapboxTileCountLimit(int limit) async {
+//     const String __pigeon_channelName =
+//         'dev.flutter.pigeon.mapbox_maps_flutter.OfflineRegionManager.setOfflineMapboxTileCountLimit';
+//     final BasicMessageChannel<Object?> __pigeon_channel =
+//         BasicMessageChannel<Object?>(
+//       __pigeon_channelName,
+//       pigeonChannelCodec,
+//       binaryMessenger: __pigeon_binaryMessenger,
+//     );
+//     final List<Object?>? __pigeon_replyList =
+//         await __pigeon_channel.send(<Object?>[limit]) as List<Object?>?;
+//     if (__pigeon_replyList == null) {
+//       throw _createConnectionError(__pigeon_channelName);
+//     } else if (__pigeon_replyList.length > 1) {
+//       throw PlatformException(
+//         code: __pigeon_replyList[0]! as String,
+//         message: __pigeon_replyList[1] as String?,
+//         details: __pigeon_replyList[2],
+//       );
+//     } else {
+//       return;
+//     }
+//   }
+// }
 
 class _ProjectionCodec extends StandardMessageCodec {
   const _ProjectionCodec();
